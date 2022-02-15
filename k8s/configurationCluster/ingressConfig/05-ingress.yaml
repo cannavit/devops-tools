@@ -6,9 +6,18 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: v1.cannavit.local 
+  - host: v2.cannavit.cloud.okteto.net
     http:
       paths:
       - backend:
           serviceName: teastore-webui
           servicePort: 8080
+
+  - host: v1.cannavit.cloud.okteto.net
+    http:
+      paths:
+      - backend:
+          serviceName: teastore
+          servicePort: 8080
+
+  #  kubectl port-forward -n test  $(kubectl get pods -n test -o custom-columns=:metadata.name | grep web) 8080:8080

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gremlin-conf
+  namespace: test-cannavit
+type: Opaque
+stringData:
+  GREMLIN_TEAM_ID: 9109c912-2e8f-4ba5-89c9-122e8fbba5c1
+  GREMLIN_TEAM_SECRET: MHcCAQEEIJP3p0WLLootthajmAL5llLYSRLE5JfjRQhoWCRQzrXxoAoGCCqGSM49AwEHoUQDQgAE+1GdSBGUOUHH99dHEwey1ifkvRhtBJLKwnUgFeT39/iNJiEeK1gKIXCqbSc7xFtPjDJu8P7fFV92X4Yupl2Mbw==
+  GREMLIN_CLUSTER_ID: cloud_okteto_com
