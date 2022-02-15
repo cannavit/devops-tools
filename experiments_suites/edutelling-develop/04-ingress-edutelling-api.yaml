@@ -1,0 +1,34 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  namespace: edutelling-develop
+  name: certificate-edutelling-api
+spec:
+  secretName: tls-edutelling-api
+  commonName: edutelling-api-develop.openshift.techgap.it
+  dnsNames:
+    - edutelling-api-develop.openshift.techgap.it
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  namespace: edutelling-develop
+  name: ingress-edutelling-api
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 0m
+spec:
+  rules:
+    - host: edutelling-api-develop.openshift.techgap.it
+      http:
+        paths:
+          - path: /api
+            backend:
+              serviceName: edutelling-api
+              servicePort: 3000
+  tls:
+    - hosts:
+        - edutelling-api-develop.openshift.techgap.it
+      secretName: tls-edutelling-api

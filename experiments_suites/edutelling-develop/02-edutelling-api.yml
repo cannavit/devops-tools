@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: edutelling-develop
+  name: volume-edutelling-files
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 8Gi
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: edutelling-develop
+  name: registry-gitlab-edutelling-api
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJyZWdpc3RyeS5naXRsYWIuY29tIjp7InVzZXJuYW1lIjoiZ2l0bGFiK2RlcGxveS10b2tlbi0xMzQxNDciLCJwYXNzd29yZCI6ImdVR2VMQzJNNWc5M21vQmU4VzVVIiwiYXV0aCI6IloybDBiR0ZpSzJSbGNHeHZlUzEwYjJ0bGJpMHhNelF4TkRjNloxVkhaVXhETWswMVp6a3piVzlDWlRoWE5WVT0ifX19
+type: kubernetes.io/dockerconfigjson
+---
+apiVersion: v1
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: edutelling-develop
+  name: edutelling-api
+  labels:
+    app: edutelling-api
+    keel.sh/policy: force
+    keel.sh/match-tag: "true"
+    keel.sh/trigger: poll
+  annotations:
+    keel.sh/pollSchedule: '@every 10m'
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: edutelling-api
+      labels:
+        app: edutelling-api
+    spec:
+      imagePullSecrets:
+        - name: registry-gitlab-edutelling-api
+      containers:
+        - name: edutelling-api
+          image: registry.gitlab.com/anoki-srl/edutelling-prj/edutelling-api:develop
+          imagePullPolicy: Always
+          env:
+            - name: NODE_ENV
+              value: 'develop'
+          volumeMounts:
+            - name: data-edutelling-files
+              mountPath: /usr/src/app/uploads
+      volumes:
+        - name: data-edutelling-files
+          persistentVolumeClaim:
+            claimName: volume-edutelling-files
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: edutelling-api
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: edutelling-develop
+  name: edutelling-api
+spec:
+  selector:
+    app: edutelling-api
+  ports:
+    - port: 3000
+  type: ClusterIP

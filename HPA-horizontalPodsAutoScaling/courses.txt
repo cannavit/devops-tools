@@ -1,0 +1,16 @@
+https://www.youtube.com/watch?v=T6wRsmrm_gk
+
+kubectl apply -f metrics
+
+kubectl -n kube-system get pods
+
+kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=10
+kubectl get hpa
+
+https://github.com/okteto/go-autoscale
+
+
+https://www.youtube.com/watch?v=T6wRsmrm_gk&t=365s
+minikube addons list
+minikube addons enable metrics-server
+kubectl -n kube-system get pods
