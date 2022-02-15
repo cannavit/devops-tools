@@ -258,27 +258,15 @@ spec:
             - name: REGISTRY_HOST
               value: "teastore-registry"
 ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: teastore-webui
-#   labels:
-#     app: teastore
-#     run: teastore-webui
-# spec:
-#   ports:
-#     - port: 8080
-#       protocol: TCP
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: teastore-webui
-# spec:
-#   ports:
-#     - port: 8080
-#       protocol: TCP
-#       # targetPort: 8080
-#   selector:
-#     app: teastore-webui
-#   sessionAffinity: None
-#   type: LoadBalancer
+apiVersion: v1
+kind: Service
+metadata:
+  name: teastore-webui
+  labels:
+    app: teastore
+    run: teastore-webui
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
