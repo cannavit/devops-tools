@@ -14,14 +14,15 @@ AWS Official Documentation:
 
     https://eu-central-1.console.aws.amazon.com/eks/home?region=eu-central-1#/home
 
-##### 2. Configuration of AWS CLI. 
+##### 2. Configuration of AWS CLI
+
     Download the cli https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
     aws configure
 
 ###### 2.1 Use the followers inputs: 
 
-    Access key ID : AKIA4AB3GHGWYDN462PX 
-    Secret access key: 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
+    Access key ID : KEY_ID 
+    Secret access key: ACCESS_ID
     Region: eu-central-1
     Output Format: Json
 
