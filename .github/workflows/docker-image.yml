@@ -1,18 +1,49 @@
+# name: Docker Image CI
+
+# on:
+#   push:
+#     branches: [ develop ]
+#   pull_request:
+#     branches: [ develop ]
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v2
+#     - name: Build-Image
+#       run: |
+#         docker build -t ghcr.io/cannavit/test:latest -f Dockerfile .  
+#     - name: Login
+#       run: |
+#         docker build -t ghcr.io/cannavit/test:latest -f Dockerfile .  
+        
+#     - name: Build the hello-world Docker image
+#       run: |
+#         echo $CR_PAT | docker login ghcr.io -u cannavit --password-stdin
+#       env:
+#         CR_PAT: ${{ secrets.CR_PAT }}
+        
 name: Docker Image CI
 
 on:
   push:
-    branches: [ develop ]
+    branches:
+    - develop
   pull_request:
-    branches: [ develop ]
 
 jobs:
   build:
+    name: 'Build'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Build-Image
-      run: |
-        docker build -t ghcr.io/cannavit/test:latest -f Dockerfile .  
-
-        
+      - name: "Build:checkout"
+        uses: actions/checkout@v2
+      - name: 'Build:dockerimage'
+        uses: docker/build-push-action@v1
+        with:
+          registry: ghcr.io
+          username: "cannavit"
+          password: ${{ secrets.PAT }}
+          repository: cannavit/test:latest
+          tags: latest
