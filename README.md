@@ -10,3 +10,13 @@ create ns test-load kubectl port-forward -n test  $(kubectl get pods -n test -o 
 
 
 kubeselect
+
+
+
+## Push GitHub repository
+#### First time add configuration
+        
+        git remote add github https://github.com/cannavit/devops-utils.git
+#### Push changes to GitHub 
+
+        git push --mirror github

@@ -22,3 +22,7 @@ export KUBECONFIG=~/.kube/config:/Users/ceciliocannavaciuolo/Documents/workspace
 kubectl config view --flatten
 export KUBECONFIG=~/.kube/config:/Users/ceciliocannavaciuolo/Documents/workspace/phd/devops-tools/context/private/anoki-develop-rancker.yaml
 kubectl config view --flatten
+export KUBECONFIG=~/.kube/config:/Users/ceciliocannavaciuolo/Documents/workspace/phd/devops-tools/context/private/minikube.yaml
+
+
+export KUBECONFIG=/Users/ceciliocannavaciuolo/Documents/workspace/phd/devops-tools/context/private/testing/okteto.yaml
