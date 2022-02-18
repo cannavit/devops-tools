@@ -21,4 +21,7 @@ jobs:
           username: "cannavit"
           password: ${{ secrets.PAT }}
           repository: cannavit/test:develop
-          tags: latest
+#           tags: latest
+          push: ${{ GitHub.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
