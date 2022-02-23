@@ -34,3 +34,54 @@ kubeselect
         docker pull ghcr.io/cannavit/test:staging
 
 
+
+helm install gremlin gremlin/gremlin \
+--namespace gremlin \
+--set gremlin.secret.managed=true \
+--set gremlin.secret.type=secret \
+--set gremlin.secret.teamID=9109c912-2e8f-4ba5-89c9-122e8fbba5c1 \
+--set gremlin.secret.clusterID=$GREMLIN_CLUSTER_ID \
+--set gremlin.secret.teamSecret=$GREMLIN_TEAM_SECRET
+
+
+export GREMLIN_TEAM_ID="9109c912-2e8f-4ba5-89c9-122e8fbba5c1"
+export GREMLIN_TEAM_SECRET="9109c912-2e8f-4ba5-89c9-122e8fbba5c1"
+export GREMLIN_IDENTIFIER="changeit"
+
+kubectl get pods --all-namespaces
+cd Deskt
+cd gremlin
+
+
+helm install gremlin gremlin/gremlin \
+    --namespace gremlin \
+    --set gremlin.secret.managed=true \
+    --set gremlin.secret.type=secret \
+    --set gremlin.secret.teamID=$GREMLIN_TEAM_ID \
+    --set gremlin.secret.clusterID=$GREMLIN_CLUSTER_ID \
+    --set gremlin.secret.teamSecret=$GREMLIN_TEAM_SECRET
+
+helm install gremlin gremlin/gremlin 
+--namespace gremlin 
+--set gremlin.secret.managed=true 
+--set gremlin.secret.type=secret 
+--set gremlin.secret.teamID=9109c912-2e8f-4ba5-89c9-122e8fbba5c1 
+--set gremlin.secret.clusterID=$GREMLIN_CLUSTER_ID 
+--set gremlin.secret.teamSecret=$GREMLIN_TEAM_SECRET
+
+
+
+
+
+export GREMLIN_TEAM_ID=9109c912-2e8f-4ba5-89c9-122e8fbba5c1
+export GREMLIN_TEAM_SECRET=289f5540-3738-45f6-9f55-403738f5f6e2
+export GREMLIN_CLUSTER_ID=changeit
+
+
+helm install gremlin gremlin/gremlin \
+    --namespace gremlin \
+    --set gremlin.secret.managed=true \
+    --set gremlin.secret.type=secret \
+    --set gremlin.secret.teamID=$GREMLIN_TEAM_ID \
+    --set gremlin.secret.clusterID=$GREMLIN_CLUSTER_ID \
+    --set gremlin.secret.teamSecret=$GREMLIN_TEAM_SECRET
