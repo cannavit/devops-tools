@@ -17,7 +17,12 @@ AWS Official Documentation:
 ##### 2. Configuration of AWS CLI
 
     Download the cli https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+
     aws configure
+
+    # Connect with cluster:
+
+    aws eks --region eu-central-1 update-kubeconfig --name fantaking-dunkest
 
 ###### 2.1 Use the followers inputs: 
 

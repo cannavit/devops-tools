@@ -21,16 +21,16 @@ kubeselect
 
         git push --mirror github
 
-
 ### Push image manual to github repositories
 
         docker build -t ghcr.io/cannavit/test:latest -f Dockerfile .  
 
         docker login ghcr.io -u cannavit
-        export CR_PAT=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
+        export CR_PAT=GITHUB_TOKEN
         echo $CR_PAT | docker login ghcr.io -u cannavit --password-stdin
 
         docker push ghcr.io/cannavit/test:latest
 
-        docker pull ghcr.io/cannavit/test:latest
+        docker pull ghcr.io/cannavit/test:staging
+
 
